@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <p>Enter the URL of your HLS or MPEG-DASH stream to check whether your stream can (hypothetically) play on the current browser.</p>
+    <details>
+      <summary>Why is this tool useful?</summary>
+      <p>An HLS or MPEG-DASH stream contains one or more video and audio tracks. Each track is encoded with a specific video or audio codec.</p>
+
+      <p>Each browser only supports a specific set of codecs. For example, regarding video codecs, Chrome supports H.264, VP9 and AV1, but doesn't support HEVC. Playback on a browser won't be successful if the HLS or MPEG-DASH stream contains no video and audio tracks with compatible codecs.</p>
+
+      <p>For example, Chrome doesn't support the HEVC codec. If you would try to playback an HLS stream which only has video tracks which are encoded with HEVC, then that stream wouldn't play on Chrome.</p>
+
+      <p>Hence, it can be useful to test whether your stream is compatible with this browser, because you might expect that it is -- but it actually is not.</p>
+      </details>
+
+      <details>
+        <summary>How does this tool work?</summary>
+        <p>This tool does two things:</p>
+          <ol><li>It fetches all video tracks from an HLS or MPEG-DASH stream.</li>
+          <li>For all fetched tracks, it checks whether the video track is compatible on the current browser through the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType" target="_blank">canPlayType()</a> function. If there are one or more compatible tracks, then the tool decides that your stream can play on the current browser.</li></ol>
+        </details>
+        <input type="text" placeholder="Enter the URL of your MPEG-DASH or HLS stream..." style="width: 100%;" id="streamUrl" />
+        <button id="validate">Validate</button>
+        <div id="supported"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
